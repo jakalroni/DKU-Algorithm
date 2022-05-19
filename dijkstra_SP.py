@@ -13,16 +13,16 @@ def choose_vertex(dist, found):
 
 def dijkstra_ShortestPath_print(graph):
     start = 0
-    vsize = len(graph[0])
-    dist = list(graph[1][start])
-    path = [start] * vsize
-    found = [False] * vsize
+    vsize = len(graph[0])           # 정점 개수
+    dist = list(graph[1][start])    # 시작 정점으로부터 최단 경로 거리를 저장
+    path = [start] * vsize          # 바로 이전 정점을 저장, 이전 정점을 따라 시작 정점까지의 경로가 최단 경로가 됨
+    found = [False] * vsize         # 방문한 정점 표시를 위해 사용
     found[start] = True
     dist[start] = 0
 
     for i in range(vsize):
-        u = choose_vertex(dist, found)
-        found[u] = True
+        u = choose_vertex(dist, found)      # 매 단계에서 최소 distance인 정점을 선택
+        found[u] = True                     # 선택 후 방문 처리
 
         for w in range(vsize):
             if not found[w]:
@@ -30,6 +30,7 @@ def dijkstra_ShortestPath_print(graph):
                     dist[w] = dist[u] + graph[1][u][w]
                     path[w] = u
 
+    # 최종 경로를 출력하기 위한 코드
     order_of_path = []
     print("--------------------------------------------------------------------------------")
     print("Src->Dst\tDist\tPath")
@@ -80,6 +81,3 @@ weight3 = [ [0, 2, 5, 1, INF, INF],
 
 graph3 = (vertex3, weight3)
 dijkstra_ShortestPath_print(graph3)
-
-
-
